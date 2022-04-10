@@ -1,9 +1,11 @@
 import React from "react";
+import Header from "./components/Header/Headr";
+import { Paper } from "@mui/material";
 
 export default function App() {
   return (
-    <div>
-      <h1>Hello, world!</h1>
-    </div>
+    <Paper>
+      <Header />
+    </Paper>
   );
 }
