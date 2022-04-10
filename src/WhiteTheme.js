@@ -6,7 +6,7 @@ const whiteTheme = createTheme({
       main: "#FFFFFF",
     },
     secondary: {
-      main: "#E5E5E5",
+      main: "#F9F9F9;",
     },
   },
 });

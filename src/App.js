@@ -8,15 +8,28 @@ import whiteTheme from "./WhiteTheme";
 export default function App() {
   return (
     <ThemeProvider theme={whiteTheme}>
-      <Box
+      <Paper
+        elevation={0}
         sx={{
+          paddingTop: "4rem",
           width: "100%",
           height: "100vh",
+          backgroundColor: "secondary.main",
         }}
       >
-        <Header />
-        <MainSection />
-      </Box>
+        <Box>
+          <Header />
+        </Box>
+        <Box
+          sx={
+            {
+              // marginTop: "4rem",
+            }
+          }
+        >
+          <MainSection />
+        </Box>
+      </Paper>
     </ThemeProvider>
   );
 }

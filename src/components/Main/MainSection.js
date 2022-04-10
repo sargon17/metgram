@@ -1,10 +1,19 @@
 import React from "react";
+import { Box } from "@mui/system";
 import PostCard from "./PostCard/PostCard";
 
 export default function MainSection() {
   return (
-    <div>
+    <Box
+      sx={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "flex-start",
+      }}
+    >
       <PostCard />
-    </div>
+    </Box>
   );
 }
