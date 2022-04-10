@@ -1,15 +1,7 @@
 import React from "react";
 import { AppBar, Typography, Toolbar, Box } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-
-const whiteTheme = createTheme({
-  palette: {
-    primary: {
-      main: "#FFFFFF",
-      darker: "#E5E5E5",
-    },
-  },
-});
+import whiteTheme from "../../WhiteTheme";
 
 export default function Header() {
   return (
