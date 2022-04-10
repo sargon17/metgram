@@ -6,7 +6,12 @@ import whiteTheme from "../../WhiteTheme";
 export default function Header() {
   return (
     <ThemeProvider theme={whiteTheme}>
-      <AppBar elevation={1} color="primary">
+      <AppBar
+        elevation={1}
+        sx={{
+          backgroundColor: "primary.transparent",
+        }}
+      >
         <Toolbar>
           <Box
             flexGrow={1}

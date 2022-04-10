@@ -1,7 +1,7 @@
 import React from "react";
-import { Toolbar, Typography, Box, Avatar, Paper } from "@mui/material";
+import { Typography, Box, Avatar, Paper } from "@mui/material";
 
-export default function PostCard() {
+export default function PostCard({ img, artist, classifications, title }) {
   return (
     <Paper
       elevation={1}
@@ -40,7 +40,7 @@ export default function PostCard() {
               fontSize: "1rem",
             }}
           >
-            gilbert Stuart
+            {artist}
           </Typography>
           <Typography
             variant="overline"
@@ -48,13 +48,13 @@ export default function PostCard() {
               lineHeight: "1rem",
             }}
           >
-            painting
+            {classifications}
           </Typography>
         </Box>
       </Box>
       <Box
         component="img"
-        src="https://images.metmuseum.org/CRDImages/ep/web-large/DT2737.jpg"
+        src={img}
         sx={{
           width: "100%",
         }}
@@ -74,11 +74,9 @@ export default function PostCard() {
             fontSize: "1rem",
           }}
         >
-          gilbert Stuart
+          {artist}
         </Typography>
-        <Typography variant="body2">
-          George Washington begun 1795 Oil on canvas
-        </Typography>
+        <Typography variant="body2">{title}</Typography>
       </Box>
     </Paper>
   );

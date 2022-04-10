@@ -13,7 +13,6 @@ export default function App() {
         sx={{
           paddingTop: "4rem",
           width: "100%",
-          height: "100vh",
           backgroundColor: "secondary.main",
         }}
       >
