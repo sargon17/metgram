@@ -2,30 +2,40 @@ import React from "react";
 import { Box } from "@mui/system";
 import PostCard from "./PostCard/PostCard";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@mui/material";
+import { getRandomPiece } from "../../generalFunctions";
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 export default function MainSection() {
   const [products, setProducts] = useState([]);
+  let [departments, setDepartments] = useState([]);
+  let validIDs = useRef([]);
 
-  //   function that generate random number
-  function randomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-
+  // get full product id's from the database
   useEffect(() => {
-    if (products.length < 12) {
-      serverRequest();
-    }
-  }, []);
+    departments.length === 0 && getDepartments();
+    axios
+      .get(
+        "https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=13"
+      )
+      .then((res) => {
+        validIDs.current = res.data.objectIDs;
+        if (products.length < 8 && validIDs.current.length > 0) {
+          serverRequest(2);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 
-  function serverRequest() {
-    for (let i = 0; i < 2; i++) {
+  function serverRequest(requestsN) {
+    for (let i = 0; i < requestsN; i++) {
       axios
         .get(
-          `https://collectionapi.metmuseum.org/public/collection/v1/objects/${randomNumber(
-            1,
-            471581
+          `https://collectionapi.metmuseum.org/public/collection/v1/objects/${getRandomPiece(
+            validIDs.current
           )}`
         )
         .then(function (response) {
@@ -55,6 +65,30 @@ export default function MainSection() {
     });
   }
 
+  function getDepartments() {
+    axios
+      .get(
+        "https://collectionapi.metmuseum.org/public/collection/v1/departments"
+      )
+      .then((res) => {
+        console.log(res.data);
+        setDepartments(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function createOptions() {
+    return departments.map(({ departmentId, displayName }) => {
+      return (
+        <MenuItem key={departmentId} value={departmentId}>
+          {displayName}
+        </MenuItem>
+      );
+    });
+  }
+
   return (
     <Box
       sx={{
@@ -65,8 +99,20 @@ export default function MainSection() {
         justifyContent: "flex-start",
       }}
     >
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-label">Department</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          // value={age}
+          label="Age"
+          // onChange={handleChange}
+        >
+          {createOptions()}
+        </Select>
+      </FormControl>
       {getData()}
-      <Button variant="primary" onClick={() => serverRequest()}>
+      <Button variant="primary" onClick={() => serverRequest(4)}>
         See Others
       </Button>
     </Box>
