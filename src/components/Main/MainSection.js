@@ -10,6 +10,7 @@ import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 export default function MainSection() {
   const [products, setProducts] = useState([]);
   let [departments, setDepartments] = useState([]);
+  const [selectedDepartment, setSelectedDepartment] = useState(1);
   let validIDs = useRef([]);
 
   // get full product id's from the database
@@ -17,12 +18,12 @@ export default function MainSection() {
     departments.length === 0 && getDepartments();
     axios
       .get(
-        "https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=13"
+        `https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=${selectedDepartment}`
       )
       .then((res) => {
         validIDs.current = res.data.objectIDs;
-        if (products.length < 8 && validIDs.current.length > 0) {
-          serverRequest(2);
+        if (products.length < 4 && validIDs.current.length > 0) {
+          serverRequest(1);
         }
       })
       .catch((err) => {
@@ -31,6 +32,10 @@ export default function MainSection() {
   });
 
   function serverRequest(requestsN) {
+    let retryNumber = 0;
+    if (retryNumber > 10) {
+      return;
+    }
     for (let i = 0; i < requestsN; i++) {
       axios
         .get(
@@ -38,14 +43,17 @@ export default function MainSection() {
             validIDs.current
           )}`
         )
-        .then(function (response) {
-          if (response.data.primaryImage === "") {
-            serverRequest();
-          }
-          response.data.primaryImageSmall &&
+        .then((response) => {
+          if (
+            response.data.primaryImageSmall &&
+            response.data.isPublicDomain === true
+          ) {
             setProducts((products) => [...products, response.data]);
+          } else {
+            serverRequest(1);
+          }
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.error(error);
         });
     }
@@ -71,15 +79,17 @@ export default function MainSection() {
         "https://collectionapi.metmuseum.org/public/collection/v1/departments"
       )
       .then((res) => {
-        console.log(res.data);
-        setDepartments(res.data);
+        setDepartments(res.data.departments);
+        // console.log("res.data", res.data);
       })
       .catch((err) => {
         console.log(err);
       });
+    // console.log(departments);
   }
 
   function createOptions() {
+    // console.log(departments);
     return departments.map(({ departmentId, displayName }) => {
       return (
         <MenuItem key={departmentId} value={departmentId}>
@@ -87,6 +97,11 @@ export default function MainSection() {
         </MenuItem>
       );
     });
+  }
+
+  function handleDepartmentChange(event) {
+    setSelectedDepartment(event.target.value);
+    setProducts([]);
   }
 
   return (
@@ -102,13 +117,13 @@ export default function MainSection() {
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-label">Department</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          // value={age}
-          label="Age"
-          // onChange={handleChange}
+          value={selectedDepartment}
+          label="Department"
+          onChange={(event) => {
+            handleDepartmentChange(event);
+          }}
         >
-          {createOptions()}
+          {departments.length > 0 && createOptions()}
         </Select>
       </FormControl>
       {getData()}
