@@ -48,7 +48,11 @@ export default function MainSection() {
             response.data.primaryImageSmall &&
             response.data.isPublicDomain === true
           ) {
-            setProducts((products) => [...products, response.data]);
+            if (response.data.isHightlight === true) {
+              setProducts((products) => [response.data, ...products]);
+            } else {
+              setProducts((products) => [...products, response.data]);
+            }
           } else {
             serverRequest(1);
           }
@@ -114,18 +118,28 @@ export default function MainSection() {
         justifyContent: "flex-start",
       }}
     >
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-label">Department</InputLabel>
-        <Select
-          value={selectedDepartment}
-          label="Department"
-          onChange={(event) => {
-            handleDepartmentChange(event);
-          }}
-        >
-          {departments.length > 0 && createOptions()}
-        </Select>
-      </FormControl>
+      <Box
+        sx={{
+          width: "1/3",
+          position: "fixed",
+          top: "100px",
+          left: "0",
+          zIndex: "1",
+        }}
+      >
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="demo-simple-select-label">Department</InputLabel>
+          <Select
+            value={selectedDepartment}
+            label="Department"
+            onChange={(event) => {
+              handleDepartmentChange(event);
+            }}
+          >
+            {departments.length > 0 && createOptions()}
+          </Select>
+        </FormControl>
+      </Box>
       {getData()}
       <Button variant="primary" onClick={() => serverRequest(4)}>
         See Others
