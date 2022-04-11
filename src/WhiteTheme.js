@@ -9,6 +9,9 @@ const whiteTheme = createTheme({
     secondary: {
       main: "#F9F9F9;",
     },
+    tertiary: {
+      main: "#222;",
+    },
   },
 });
 

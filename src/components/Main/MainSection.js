@@ -5,7 +5,13 @@ import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@mui/material";
 import { getRandomPiece } from "../../generalFunctions";
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  CircularProgress,
+} from "@mui/material";
 
 export default function MainSection() {
   const [products, setProducts] = useState([]);
@@ -141,6 +147,14 @@ export default function MainSection() {
         </FormControl>
       </Box>
       {getData()}
+      {products.length < 4 && (
+        <CircularProgress
+          color="tertiary"
+          sx={{
+            margin: "20px",
+          }}
+        />
+      )}
       <Button variant="primary" onClick={() => serverRequest(4)}>
         See Others
       </Button>
