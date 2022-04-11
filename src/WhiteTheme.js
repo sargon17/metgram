@@ -10,7 +10,7 @@ const whiteTheme = createTheme({
       main: "#F9F9F9;",
     },
     tertiary: {
-      main: "#222;",
+      main: "#222222;",
     },
   },
 });

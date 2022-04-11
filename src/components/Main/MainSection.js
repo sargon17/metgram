@@ -155,9 +155,18 @@ export default function MainSection() {
           }}
         />
       )}
-      <Button variant="primary" onClick={() => serverRequest(4)}>
-        See Others
-      </Button>
+      {products.length > 0 && (
+        <Button
+          variant="contained"
+          sx={{
+            background: "tertiary",
+            margin: "20px",
+          }}
+          onClick={() => serverRequest(4)}
+        >
+          See More
+        </Button>
+      )}
     </Box>
   );
 }
