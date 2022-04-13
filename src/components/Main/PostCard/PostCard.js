@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, Box, Avatar, Paper } from "@mui/material";
+import { maxWidth, width } from "@mui/system";
 
 export default function PostCard({ img, artist, classifications, title }) {
   return (
@@ -10,6 +11,7 @@ export default function PostCard({ img, artist, classifications, title }) {
         margin: "1rem",
         borderRadius: "0.5rem",
       }}
+      className="met__post-card"
     >
       <Box
         sx={{
