@@ -24,3 +24,15 @@ export function createOptions(departmentsList) {
     );
   });
 }
+
+// function that return the initials of the artist
+export function getInitials(artist) {
+  if (artist === "") {
+    artist = "Unknown Artist";
+  }
+  let initials = artist.split(" ");
+  if (initials.length === 1) {
+    return initials[0].charAt(0);
+  }
+  return initials[0][0] + initials[1][0];
+}

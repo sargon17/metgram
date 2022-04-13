@@ -128,9 +128,9 @@ export default function MainSection() {
           </Select>
         </FormControl>
       </Box>
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ margin: "2px" }}>
         <Grid container justifyContent="center">
-          <Grid item xs={10} sm={8} md={6} lg={4} xl={2}>
+          <Grid item xs={12} sm={8} md={6} lg={4} xl={2}>
             <Grid
               container
               alignItems="strech"
