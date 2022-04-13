@@ -4,12 +4,11 @@ import PostCard from "./PostCard/PostCard";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@mui/material";
-import { getRandomPiece } from "../../generalFunctions";
+import { getRandomPiece, createOptions } from "../../generalFunctions";
 import {
   FormControl,
   InputLabel,
   Select,
-  MenuItem,
   CircularProgress,
   Grid,
 } from "@mui/material";
@@ -39,10 +38,6 @@ export default function MainSection() {
   });
 
   function serverRequest(requestsN) {
-    let retryNumber = 0;
-    if (retryNumber > 10) {
-      return;
-    }
     for (let i = 0; i < requestsN; i++) {
       axios
         .get(
@@ -99,17 +94,6 @@ export default function MainSection() {
     // console.log(departments);
   }
 
-  function createOptions() {
-    // console.log(departments);
-    return departments.map(({ departmentId, displayName }) => {
-      return (
-        <MenuItem key={departmentId} value={departmentId}>
-          {displayName}
-        </MenuItem>
-      );
-    });
-  }
-
   function handleDepartmentChange(event) {
     setSelectedDepartment(event.target.value);
     setProducts([]);
@@ -119,6 +103,7 @@ export default function MainSection() {
     <Box
       sx={{
         width: "100%",
+        paddingTop: "10px",
       }}
     >
       <Box
@@ -139,21 +124,21 @@ export default function MainSection() {
               handleDepartmentChange(event);
             }}
           >
-            {departments.length > 0 && createOptions()}
+            {departments.length > 0 && createOptions(departments)}
           </Select>
         </FormControl>
       </Box>
       <Box sx={{ width: "100%" }}>
         <Grid container justifyContent="center">
-          <Grid item xs={10} sm={10} md={8}>
+          <Grid item xs={10} sm={8} md={6} lg={4} xl={2}>
             <Grid
               container
-              alignItems="center"
-              justifyContent="center"
-              wrap="wrap"
-              rowSpacing={2}
+              alignItems="strech"
+              direction="column"
+              alignContent="stretch"
+              rowGap={2}
             >
-              {getData()}
+              {products.length > 2 && getData()}
               {products.length < 4 && (
                 <CircularProgress
                   color="tertiary"
@@ -162,20 +147,28 @@ export default function MainSection() {
                   }}
                 />
               )}
-              <Grid item xs={12}>
-                {products.length > 0 && (
-                  <Button
-                    variant="contained"
-                    sx={{
-                      background: "tertiary",
-                      margin: "20px",
-                    }}
-                    onClick={() => serverRequest(4)}
-                  >
-                    See More
-                  </Button>
-                )}
-              </Grid>
+            </Grid>
+            <Grid
+              container
+              spacing={1}
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              alignContent="center"
+              wrap="wrap"
+            >
+              {products.length > 0 && (
+                <Button
+                  variant="contained"
+                  sx={{
+                    background: "tertiary",
+                    margin: "20px auto",
+                  }}
+                  onClick={() => serverRequest(4)}
+                >
+                  See More
+                </Button>
+              )}
             </Grid>
           </Grid>
         </Grid>

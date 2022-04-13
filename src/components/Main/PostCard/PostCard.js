@@ -3,7 +3,7 @@ import { Typography, Box, Avatar, Paper, Grid } from "@mui/material";
 
 export default function PostCard({ img, artist, classifications, title }) {
   return (
-    <Grid item xs={12} md={8}>
+    <Grid item xs={12}>
       <Paper
         elevation={1}
         sx={{
@@ -62,6 +62,8 @@ export default function PostCard({ img, artist, classifications, title }) {
               src={img}
               sx={{
                 width: "100%",
+                maxHeight: "40rem",
+                objectFit: "contain",
               }}
             ></Box>
           </Grid>
