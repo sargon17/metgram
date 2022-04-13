@@ -11,6 +11,7 @@ import {
   Select,
   MenuItem,
   CircularProgress,
+  Grid,
 } from "@mui/material";
 
 export default function MainSection() {
@@ -118,10 +119,6 @@ export default function MainSection() {
     <Box
       sx={{
         width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "flex-start",
       }}
     >
       <Box
@@ -146,27 +143,43 @@ export default function MainSection() {
           </Select>
         </FormControl>
       </Box>
-      {getData()}
-      {products.length < 4 && (
-        <CircularProgress
-          color="tertiary"
-          sx={{
-            margin: "20px",
-          }}
-        />
-      )}
-      {products.length > 0 && (
-        <Button
-          variant="contained"
-          sx={{
-            background: "tertiary",
-            margin: "20px",
-          }}
-          onClick={() => serverRequest(4)}
-        >
-          See More
-        </Button>
-      )}
+      <Box sx={{ width: "100%" }}>
+        <Grid container justifyContent="center">
+          <Grid item xs={10} sm={10} md={8}>
+            <Grid
+              container
+              alignItems="center"
+              justifyContent="center"
+              wrap="wrap"
+              rowSpacing={2}
+            >
+              {getData()}
+              {products.length < 4 && (
+                <CircularProgress
+                  color="tertiary"
+                  sx={{
+                    margin: "20px",
+                  }}
+                />
+              )}
+              <Grid item xs={12}>
+                {products.length > 0 && (
+                  <Button
+                    variant="contained"
+                    sx={{
+                      background: "tertiary",
+                      margin: "20px",
+                    }}
+                    onClick={() => serverRequest(4)}
+                  >
+                    See More
+                  </Button>
+                )}
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Box>
     </Box>
   );
 }
