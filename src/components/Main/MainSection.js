@@ -131,7 +131,11 @@ export default function MainSection() {
           zIndex: "1",
         }}
       >
-        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <FormControl
+          variant="standard"
+          md="none"
+          sx={{ m: 1, minWidth: 120, display: { xs: "none", lg: "block" } }}
+        >
           <InputLabel id="demo-simple-select-label">Department</InputLabel>
           <Select
             value={selectedDepartment}
