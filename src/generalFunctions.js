@@ -46,10 +46,40 @@ function stringToColor(string) {
 }
 
 export function stringAvatar(name) {
+  name = name.toUpperCase();
+
+  let symbols = [
+    ".",
+    ",",
+    "!",
+    "?",
+    ";",
+    ":",
+    "(",
+    ")",
+    '"',
+    "'",
+    "&",
+    "%",
+    "$",
+  ];
+
+  symbols.forEach((symbol) => {
+    name = name.replace(symbol, "");
+  });
+
+  if (name.split(" ").length > 1) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+    };
+  }
   return {
     sx: {
       bgcolor: stringToColor(name),
     },
-    children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+    children: `${name[0]}`,
   };
 }

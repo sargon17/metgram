@@ -3,7 +3,6 @@ import { Box } from "@mui/system";
 import PostCard from "./PostCard/PostCard";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
-import { Button } from "@mui/material";
 import { getRandomPiece, createOptions } from "../../generalFunctions";
 import {
   FormControl,
@@ -11,13 +10,32 @@ import {
   Select,
   CircularProgress,
   Grid,
+  Button,
 } from "@mui/material";
 
 export default function MainSection() {
-  const [products, setProducts] = useState([]);
+  const [posts, setposts] = useState([]);
   let [departments, setDepartments] = useState([]);
-  const [selectedDepartment, setSelectedDepartment] = useState(1);
+  const [selectedDepartment, setSelectedDepartment] = useState(11);
   let validIDs = useRef([]);
+
+  let [loading, setLoading] = useState(true);
+
+  function handleLoading(state) {
+    setLoading(state);
+  }
+
+  let [displayablePosts, setDisplayablePosts] = useState(5);
+
+  function handleDisplayablePosts() {
+    setDisplayablePosts(displayablePosts + 5);
+
+    if (posts.length < displayablePosts + 10) {
+      serverRequest(5);
+    }
+    console.log("displayablePosts", displayablePosts);
+    console.log("posts.length", posts.length);
+  }
 
   // get full product id's from the database
   useEffect(() => {
@@ -28,8 +46,11 @@ export default function MainSection() {
       )
       .then((res) => {
         validIDs.current = res.data.objectIDs;
-        if (products.length < 4 && validIDs.current.length > 0) {
-          serverRequest(1);
+        if (
+          posts.length < displayablePosts + 10 &&
+          validIDs.current.length > 0
+        ) {
+          serverRequest(3);
         }
       })
       .catch((err) => {
@@ -50,23 +71,18 @@ export default function MainSection() {
             response.data.primaryImageSmall &&
             response.data.isPublicDomain === true
           ) {
-            if (response.data.isHightlight === true) {
-              setProducts((products) => [response.data, ...products]);
-            } else {
-              setProducts((products) => [...products, response.data]);
-            }
-          } else {
-            serverRequest(1);
+            setposts((posts) => [...posts, response.data]);
           }
         })
         .catch((error) => {
           console.error(error);
         });
     }
+    handleLoading(false);
   }
 
   function getData() {
-    return products.map((post) => {
+    return posts.slice(0, displayablePosts).map((post) => {
       return (
         <PostCard
           key={post.id}
@@ -96,7 +112,7 @@ export default function MainSection() {
 
   function handleDepartmentChange(event) {
     setSelectedDepartment(event.target.value);
-    setProducts([]);
+    setposts([]);
   }
 
   return (
@@ -130,7 +146,7 @@ export default function MainSection() {
       </Box>
       <Box sx={{ margin: "2px" }}>
         <Grid container justifyContent="center">
-          <Grid item xs={12} sm={8} md={6} lg={4} xl={2}>
+          <Grid item xs={12} sm={10} md={8} lg={6} xl={4}>
             <Grid
               container
               alignItems="strech"
@@ -138,15 +154,7 @@ export default function MainSection() {
               alignContent="stretch"
               rowGap={2}
             >
-              {products.length > 2 && getData()}
-              {products.length < 4 && (
-                <CircularProgress
-                  color="tertiary"
-                  sx={{
-                    margin: "20px",
-                  }}
-                />
-              )}
+              {posts.length > 2 && getData()}
             </Grid>
             <Grid
               container
@@ -157,14 +165,24 @@ export default function MainSection() {
               alignContent="center"
               wrap="wrap"
             >
-              {products.length > 0 && (
+              {loading && (
+                <CircularProgress
+                  color="tertiary"
+                  sx={{
+                    margin: "20px",
+                  }}
+                />
+              )}
+              {!loading && (
                 <Button
                   variant="contained"
                   sx={{
                     background: "tertiary",
                     margin: "20px auto",
                   }}
-                  onClick={() => serverRequest(4)}
+                  onClick={() => {
+                    handleDisplayablePosts();
+                  }}
                 >
                   See More
                 </Button>

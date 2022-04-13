@@ -6,7 +6,7 @@ export default function PostCard({ img, artist, classifications, title }) {
   if (img === "") {
     img = "https://via.placeholder.com/300x300";
   }
-  if (artist === "") {
+  if (artist === "" || artist === undefined) {
     artist = "Unknown Artist";
   }
 
