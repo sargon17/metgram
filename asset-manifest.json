@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/metgram/static/js/main.9acb3092.js",
+    "main.js": "/metgram/static/js/main.bdc9f5e5.js",
     "index.html": "/metgram/index.html",
-    "main.9acb3092.js.map": "/metgram/static/js/main.9acb3092.js.map"
+    "main.bdc9f5e5.js.map": "/metgram/static/js/main.bdc9f5e5.js.map"
   },
   "entrypoints": [
-    "static/js/main.9acb3092.js"
+    "static/js/main.bdc9f5e5.js"
   ]
 }
