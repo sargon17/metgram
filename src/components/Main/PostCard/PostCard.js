@@ -1,8 +1,15 @@
 import React from "react";
 import { Typography, Box, Avatar, Paper, Grid } from "@mui/material";
-import { getInitials } from "../../../generalFunctions";
+import { stringAvatar } from "../../../generalFunctions";
 
 export default function PostCard({ img, artist, classifications, title }) {
+  if (img === "") {
+    img = "https://via.placeholder.com/300x300";
+  }
+  if (artist === "") {
+    artist = "Unknown Artist";
+  }
+
   return (
     <Grid item xs={12}>
       <Paper
@@ -24,7 +31,7 @@ export default function PostCard({ img, artist, classifications, title }) {
                 padding: " 0.5rem 1rem",
               }}
             >
-              <Avatar>{getInitials(artist)}</Avatar>
+              <Avatar {...stringAvatar(artist)} />
               <Box
                 sx={{
                   boxSizing: "border-box",
@@ -44,7 +51,7 @@ export default function PostCard({ img, artist, classifications, title }) {
                     fontSize: "1rem",
                   }}
                 >
-                  {artist === "" ? "Unknown Artist" : artist}
+                  {artist}
                 </Typography>
                 <Typography
                   variant="overline"
