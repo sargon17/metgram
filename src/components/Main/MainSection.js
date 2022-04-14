@@ -29,20 +29,6 @@ export default function MainSection() {
     handleDepartmentChange,
   ] = useContext(ImportedDataContext);
 
-  // const [
-  //   {
-  //     posts,
-  //     departments,
-  //     selectedDepartment,
-  //     displayablePosts,
-  //     handleDisplayablePosts,
-  //     loading,
-  //     handleDepartmentChange,
-  //   },
-  // ] = useContext(ImportedDataContext);
-
-  console.log("departments", departments);
-
   function getData() {
     return posts.slice(0, displayablePosts).map((post) => {
       return (
