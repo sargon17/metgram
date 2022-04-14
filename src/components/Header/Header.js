@@ -1,20 +1,54 @@
-import React, { useState } from "react";
-import { AppBar, Typography, Toolbar, Box, Button } from "@mui/material";
+import React, { useState, useContext } from "react";
+import {
+  AppBar,
+  Typography,
+  Toolbar,
+  Box,
+  Button,
+  Grid,
+  Select,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import whiteTheme from "../../WhiteTheme";
+import { ImportedDataContext } from "../../context/importedData";
+import { createOptions } from "../../generalFunctions";
+import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function Header() {
-  let [menuOpen, setMenuOpen] = useState(true);
+  const [
+    posts,
+    setposts,
+    departments,
+    setDepartments,
+    selectedDepartment,
+    displayablePosts,
+    handleDisplayablePosts,
+    setSelectedDepartment,
+    loading,
+    setDisplayablePosts,
+    handleLoading,
+    handleDepartmentChange,
+  ] = useContext(ImportedDataContext);
+  let [menuOpen, setMenuOpen] = useState(false);
 
-  let menu = () => {
-    <Box
-      role="presentation"
-      sx={{
-        width: "100%",
-        height: "100%",
-      }}
-    ></Box>;
-  };
+  function handleMenu() {
+    setMenuOpen(!menuOpen);
+  }
+
+  // let menu = () => {
+  //   <Box
+  //     elevation={2}
+  //     role="presentation"
+  //     sx={{
+  //       width: "100%",
+  //       height: "100%",
+  //       backgroundColor: "secondary.main",
+  //     }}
+  //   ></Box>;
+  // };
 
   return (
     <ThemeProvider theme={whiteTheme}>
@@ -44,13 +78,73 @@ export default function Header() {
               metgram
             </Typography>
             <Button
-              variant="outlined"
+              variant="text"
               color="tertiary"
-              sx={{ display: { xs: "block", lg: "none" } }}
+              sx={{ display: { lg: "none" } }}
+              onClick={handleMenu}
             >
-              Menu
+              <SearchRoundedIcon />
             </Button>
-            {menu}
+            <Box
+              elevation={2}
+              role="presentation"
+              sx={{
+                position: "fixed",
+                top: "0",
+                left: "0",
+                width: "100%",
+                height: "100vh",
+                backgroundColor: "secondary.main",
+                display: menuOpen ? "block" : "none",
+                paddingTop: "20px",
+              }}
+            >
+              <Grid
+                container
+                spacing={0}
+                justifyContent="flex-end"
+                margin={"10px 0"}
+              >
+                <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
+                  <Button variant="text" color="tertiary" onClick={handleMenu}>
+                    <CloseIcon />
+                  </Button>
+                </Grid>
+              </Grid>
+              <Grid
+                container
+                spacing={1}
+                direction="row"
+                justifyContent="center"
+                alignItems="flex-start"
+                alignContent="stretch"
+                wrap="wrap"
+              >
+                <Grid item xs={10} sm={10} md={8} lg={6} xl={4}>
+                  <FormControl
+                    variant="filled"
+                    md="none"
+                    sx={{
+                      minWidth: 120,
+                      width: "100%",
+                    }}
+                  >
+                    <InputLabel id="demo-simple-select-label">
+                      Department
+                    </InputLabel>
+                    <Select
+                      value={selectedDepartment}
+                      label="Department"
+                      onChange={(event) => {
+                        handleDepartmentChange(event);
+                      }}
+                    >
+                      {departments.length > 0 && createOptions(departments)}
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
+            </Box>
           </Box>
         </Toolbar>
       </AppBar>

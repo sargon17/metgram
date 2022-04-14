@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/system";
 import PostCard from "./PostCard/PostCard";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { createOptions } from "../../generalFunctions";
 import {
   FormControl,
@@ -26,7 +26,22 @@ export default function MainSection() {
     loading,
     setDisplayablePosts,
     handleLoading,
+    handleDepartmentChange,
   ] = useContext(ImportedDataContext);
+
+  // const [
+  //   {
+  //     posts,
+  //     departments,
+  //     selectedDepartment,
+  //     displayablePosts,
+  //     handleDisplayablePosts,
+  //     loading,
+  //     handleDepartmentChange,
+  //   },
+  // ] = useContext(ImportedDataContext);
+
+  console.log("departments", departments);
 
   function getData() {
     return posts.slice(0, displayablePosts).map((post) => {
@@ -40,13 +55,6 @@ export default function MainSection() {
         />
       );
     });
-  }
-
-  function handleDepartmentChange(event) {
-    setSelectedDepartment(event.target.value);
-    setposts([]);
-    setDisplayablePosts(5);
-    handleLoading(true);
   }
 
   return (

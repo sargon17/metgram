@@ -82,7 +82,12 @@ export const ImportedDataProvider = (props) => {
       .catch((err) => {
         console.log(err);
       });
-    // console.log(departments);
+  }
+  function handleDepartmentChange(event) {
+    setSelectedDepartment(event.target.value);
+    setposts([]);
+    setDisplayablePosts(5);
+    handleLoading(true);
   }
 
   return (
@@ -99,6 +104,7 @@ export const ImportedDataProvider = (props) => {
         loading,
         setDisplayablePosts,
         handleLoading,
+        handleDepartmentChange,
       ]}
     >
       {props.children}
