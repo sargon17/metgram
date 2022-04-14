@@ -4,6 +4,7 @@ import MainSection from "./components/Main/MainSection";
 import { Paper, Box } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import whiteTheme from "./WhiteTheme";
+import { ImportedDataProvider } from "./context/importedData";
 
 export default function App() {
   return (
@@ -16,18 +17,14 @@ export default function App() {
           backgroundColor: "secondary.main",
         }}
       >
-        <Box>
-          <Header />
-        </Box>
-        <Box
-          sx={
-            {
-              // marginTop: "4rem",
-            }
-          }
-        >
-          <MainSection />
-        </Box>
+        <ImportedDataProvider>
+          <Box>
+            <Header />
+          </Box>
+          <Box>
+            <MainSection />
+          </Box>
+        </ImportedDataProvider>
       </Paper>
     </ThemeProvider>
   );

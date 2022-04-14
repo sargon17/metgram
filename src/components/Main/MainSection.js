@@ -1,9 +1,8 @@
 import React from "react";
 import { Box } from "@mui/system";
 import PostCard from "./PostCard/PostCard";
-import axios from "axios";
-import { useState, useEffect, useRef } from "react";
-import { getRandomPiece, createOptions } from "../../generalFunctions";
+import { useState, useContext } from "react";
+import { createOptions } from "../../generalFunctions";
 import {
   FormControl,
   InputLabel,
@@ -12,74 +11,22 @@ import {
   Grid,
   Button,
 } from "@mui/material";
+import { ImportedDataContext } from "../../context/importedData";
 
 export default function MainSection() {
-  const [posts, setposts] = useState([]);
-  let [departments, setDepartments] = useState([]);
-  const [selectedDepartment, setSelectedDepartment] = useState(11);
-  let validIDs = useRef([]);
-
-  let [loading, setLoading] = useState(true);
-
-  function handleLoading(state) {
-    setLoading(state);
-  }
-
-  let [displayablePosts, setDisplayablePosts] = useState(5);
-
-  function handleDisplayablePosts() {
-    setDisplayablePosts(displayablePosts + 5);
-
-    if (posts.length < displayablePosts + 10) {
-      serverRequest(5);
-    }
-    console.log("displayablePosts", displayablePosts);
-    console.log("posts.length", posts.length);
-  }
-
-  // get full product id's from the database
-  useEffect(() => {
-    departments.length === 0 && getDepartments();
-    axios
-      .get(
-        `https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=${selectedDepartment}`
-      )
-      .then((res) => {
-        validIDs.current = res.data.objectIDs;
-        if (
-          posts.length < displayablePosts + 10 &&
-          validIDs.current.length > 0
-        ) {
-          serverRequest(3);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-
-  function serverRequest(requestsN) {
-    for (let i = 0; i < requestsN; i++) {
-      axios
-        .get(
-          `https://collectionapi.metmuseum.org/public/collection/v1/objects/${getRandomPiece(
-            validIDs.current
-          )}`
-        )
-        .then((response) => {
-          if (
-            response.data.primaryImageSmall &&
-            response.data.isPublicDomain === true
-          ) {
-            setposts((posts) => [...posts, response.data]);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-    handleLoading(false);
-  }
+  const [
+    posts,
+    setposts,
+    departments,
+    setDepartments,
+    selectedDepartment,
+    displayablePosts,
+    handleDisplayablePosts,
+    setSelectedDepartment,
+    loading,
+    setDisplayablePosts,
+    handleLoading,
+  ] = useContext(ImportedDataContext);
 
   function getData() {
     return posts.slice(0, displayablePosts).map((post) => {
@@ -95,24 +42,11 @@ export default function MainSection() {
     });
   }
 
-  function getDepartments() {
-    axios
-      .get(
-        "https://collectionapi.metmuseum.org/public/collection/v1/departments"
-      )
-      .then((res) => {
-        setDepartments(res.data.departments);
-        // console.log("res.data", res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    // console.log(departments);
-  }
-
   function handleDepartmentChange(event) {
     setSelectedDepartment(event.target.value);
     setposts([]);
+    setDisplayablePosts(5);
+    handleLoading(true);
   }
 
   return (
