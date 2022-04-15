@@ -38,18 +38,6 @@ export default function Header() {
     setMenuOpen(!menuOpen);
   }
 
-  // let menu = () => {
-  //   <Box
-  //     elevation={2}
-  //     role="presentation"
-  //     sx={{
-  //       width: "100%",
-  //       height: "100%",
-  //       backgroundColor: "secondary.main",
-  //     }}
-  //   ></Box>;
-  // };
-
   return (
     <ThemeProvider theme={whiteTheme}>
       <AppBar
@@ -130,7 +118,7 @@ export default function Header() {
                     }}
                   >
                     <InputLabel id="demo-simple-select-label">
-                      Department
+                      Chose the MET Department
                     </InputLabel>
                     <Select
                       value={selectedDepartment}
@@ -141,6 +129,18 @@ export default function Header() {
                     >
                       {departments.length > 0 && createOptions(departments)}
                     </Select>
+                    <Button
+                      variant="contained"
+                      color="tertiary"
+                      startIcon={<SearchRoundedIcon />}
+                      onClick={handleMenu}
+                      sx={{
+                        marginTop: "10px",
+                        color: "tertiary.contrastText",
+                      }}
+                    >
+                      Search
+                    </Button>
                   </FormControl>
                 </Grid>
               </Grid>

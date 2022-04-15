@@ -11,6 +11,7 @@ const whiteTheme = createTheme({
     },
     tertiary: {
       main: "#222222;",
+      contrastText: "#FFFFFF",
     },
   },
 });
