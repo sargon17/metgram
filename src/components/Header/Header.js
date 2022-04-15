@@ -72,8 +72,9 @@ export default function Header() {
               color="tertiary"
               sx={{ display: { lg: "none" } }}
               onClick={handleMenu}
+              startIcon={<FilterListIcon />}
             >
-              <FilterListIcon />
+              Filter
             </Button>
 
             <Box
