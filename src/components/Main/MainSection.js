@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/system";
 import PostCard from "./PostCard/PostCard";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { createOptions } from "../../generalFunctions";
 import {
   FormControl,
@@ -45,6 +45,9 @@ export default function MainSection() {
     });
   }
 
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const filterMenuStatus = isFilterOpen ? "translateX(0)" : "translateX(-90%)";
+
   return (
     <Box
       sx={{
@@ -55,17 +58,18 @@ export default function MainSection() {
       <Box
         elevation={1}
         sx={{
+          minWidth: "320px",
           height: "60vh",
           position: "fixed",
           top: "100px",
           left: "0",
           zIndex: "1",
-          transform: "translateX(-90%)",
           transition: "transform 0.5s ease-in-out",
           display: { xs: "none", lg: "block" },
-          ":hover": { transform: "translateX(0%)" },
-          ":focus-within": { transform: "translateX(0%)" },
+          transform: filterMenuStatus,
         }}
+        onMouseEnter={() => setIsFilterOpen(true)}
+        onMouseLeave={() => setIsFilterOpen(false)}
       >
         <Paper
           elevation={1}
@@ -91,6 +95,8 @@ export default function MainSection() {
             sx={{
               margin: "20px 10px",
               minWidth: "200px",
+              opacity: isFilterOpen ? "1" : "0",
+              transition: "opacity 0.5s ease-in-out",
             }}
           >
             <InputLabel id="department">Chose the MET Department</InputLabel>
@@ -104,6 +110,29 @@ export default function MainSection() {
               {departments.length > 0 && createOptions(departments)}
             </Select>
           </FormControl>
+
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              right: "0",
+              transform: "translate(30%, -50%)",
+              opacity: isFilterOpen ? "0" : "1",
+              transition: "opacity 0.5s ease-in",
+            }}
+          >
+            <Typography
+              variant="body1"
+              color="tertiary"
+              sx={{
+                fontFamily: "Roboto",
+                fontWeight: "bold",
+                transform: "rotate(-90deg)",
+              }}
+            >
+              Filters Menu
+            </Typography>
+          </Box>
         </Paper>
       </Box>
       <Box sx={{ margin: "2px" }}>
