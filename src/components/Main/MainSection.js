@@ -46,7 +46,9 @@ export default function MainSection() {
   }
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const filterMenuStatus = isFilterOpen ? "translateX(0)" : "translateX(-90%)";
+  const filterMenuStatus = isFilterOpen
+    ? "translateX(0)"
+    : "translateX( calc(-100% + 40px))";
 
   return (
     <Box
@@ -76,6 +78,8 @@ export default function MainSection() {
           sx={{
             padding: "10px",
             height: "100%",
+            borderRight: "40px solid",
+            // borderColor: "primary.main",
           }}
         >
           <Box>
@@ -95,8 +99,8 @@ export default function MainSection() {
             sx={{
               margin: "20px 10px",
               minWidth: "200px",
-              opacity: isFilterOpen ? "1" : "0",
-              transition: "opacity 0.5s ease-in-out",
+              // opacity: isFilterOpen ? "1" : "0",
+              // transition: "opacity 0.5s ease-in-out",
             }}
           >
             <InputLabel id="department">Chose the MET Department</InputLabel>
@@ -123,7 +127,7 @@ export default function MainSection() {
           >
             <Typography
               variant="body1"
-              color="tertiary"
+              color="secondary.main"
               sx={{
                 fontFamily: "Roboto",
                 fontWeight: "bold",
