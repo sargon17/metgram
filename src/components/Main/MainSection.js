@@ -10,6 +10,8 @@ import {
   CircularProgress,
   Grid,
   Button,
+  Paper,
+  Typography,
 } from "@mui/material";
 import { ImportedDataContext } from "../../context/importedData";
 
@@ -51,30 +53,58 @@ export default function MainSection() {
       }}
     >
       <Box
+        elevation={1}
         sx={{
-          width: "1/3",
+          height: "60vh",
           position: "fixed",
           top: "100px",
           left: "0",
           zIndex: "1",
+          transform: "translateX(-90%)",
+          transition: "transform 0.5s ease-in-out",
+          display: { xs: "none", lg: "block" },
+          ":hover": { transform: "translateX(0%)" },
+          ":focus-within": { transform: "translateX(0%)" },
         }}
       >
-        <FormControl
-          variant="standard"
-          md="none"
-          sx={{ m: 1, minWidth: 120, display: { xs: "none", lg: "block" } }}
+        <Paper
+          elevation={1}
+          sx={{
+            padding: "10px",
+            height: "100%",
+          }}
         >
-          <InputLabel id="demo-simple-select-label">Department</InputLabel>
-          <Select
-            value={selectedDepartment}
-            label="Department"
-            onChange={(event) => {
-              handleDepartmentChange(event);
+          <Box>
+            <Typography
+              variant="h6"
+              sx={{
+                fontFamily: "Roboto",
+                color: "tertiary.main",
+              }}
+            >
+              Filter
+            </Typography>
+          </Box>
+          <FormControl
+            variant="outlined"
+            color="tertiary"
+            sx={{
+              margin: "20px 10px",
+              minWidth: "200px",
             }}
           >
-            {departments.length > 0 && createOptions(departments)}
-          </Select>
-        </FormControl>
+            <InputLabel id="department">Chose the MET Department</InputLabel>
+            <Select
+              value={selectedDepartment}
+              label="Chose the MET Department"
+              onChange={(event) => {
+                handleDepartmentChange(event);
+              }}
+            >
+              {departments.length > 0 && createOptions(departments)}
+            </Select>
+          </FormControl>
+        </Paper>
       </Box>
       <Box sx={{ margin: "2px" }}>
         <Grid container justifyContent="center">
