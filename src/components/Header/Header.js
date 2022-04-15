@@ -17,6 +17,7 @@ import { ImportedDataContext } from "../../context/importedData";
 import { createOptions } from "../../generalFunctions";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import CloseIcon from "@mui/icons-material/Close";
+import FilterListIcon from "@mui/icons-material/FilterList";
 
 export default function Header() {
   const [
@@ -72,7 +73,7 @@ export default function Header() {
               sx={{ display: { lg: "none" } }}
               onClick={handleMenu}
             >
-              <SearchRoundedIcon />
+              <FilterListIcon />
             </Button>
 
             <Box
@@ -159,14 +160,14 @@ export default function Header() {
                       <Button
                         variant="contained"
                         color="tertiary"
-                        startIcon={<SearchRoundedIcon />}
+                        startIcon={<FilterListIcon />}
                         onClick={handleMenu}
                         sx={{
                           marginTop: "10px",
                           color: "tertiary.contrastText",
                         }}
                       >
-                        Search
+                        Filter
                       </Button>
                     </FormControl>
                   </Grid>
