@@ -14,9 +14,11 @@ import {
 import { ThemeProvider } from "@mui/material/styles";
 import whiteTheme from "../../WhiteTheme";
 import { ImportedDataContext } from "../../context/importedData";
+import { IconButton } from "@mui/material";
 import { createOptions } from "../../generalFunctions";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import CloseIcon from "@mui/icons-material/Close";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import FilterListIcon from "@mui/icons-material/FilterList";
 
 export default function Header() {
@@ -40,20 +42,12 @@ export default function Header() {
     setMenuOpen(!menuOpen);
   }
 
-  console.log(selectedDepartment);
-  console.log(departments);
-
-  // let selectedDepartmentIndex = departments.forEach((department) => {
-  //   department.id === selectedDepartment ? department.displayName : null;
-  // });
   let selectedDepartmentName =
     departments.length > 0
       ? departments.find((department) => {
           return department.departmentId === selectedDepartment;
         }).displayName
       : null;
-
-  console.log(selectedDepartmentName);
 
   return (
     <ThemeProvider theme={whiteTheme}>
@@ -95,7 +89,15 @@ export default function Header() {
                 {selectedDepartmentName}
               </Typography>
             </Box>
-            <Button
+            <Box>
+              <IconButton variant="text" color="tertiary">
+                <SearchRoundedIcon />
+              </IconButton>
+              <IconButton variant="text" color="tertiary">
+                <DarkModeIcon />
+              </IconButton>
+            </Box>
+            {/* <Button
               variant="text"
               color="tertiary"
               sx={{ display: { lg: "none" } }}
@@ -103,9 +105,9 @@ export default function Header() {
               startIcon={<FilterListIcon />}
             >
               Filter
-            </Button>
+            </Button> */}
 
-            <Box
+            {/* <Box
               sx={{
                 height: "100vh",
                 width: "100vw",
@@ -201,7 +203,7 @@ export default function Header() {
                   </Grid>
                 </Grid>
               </Paper>
-            </Box>
+            </Box>*/}
           </Box>
         </Toolbar>
       </AppBar>

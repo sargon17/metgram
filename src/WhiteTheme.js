@@ -17,6 +17,7 @@ const whiteTheme = createTheme({
     },
   },
   shadows: {
+    0: "none",
     1: "0px 4px 7px rgba(0, 0, 0, 0.1);",
     2: "0px 4px 7px rgba(0, 0, 0, 0.1);",
     3: "0px 4px 7px rgba(0, 0, 0, 0.1);",

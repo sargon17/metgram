@@ -54,6 +54,7 @@ export default function MainSection() {
     <Box
       sx={{
         width: "100vw",
+        minHeight: "100vh",
         paddingTop: "10px",
       }}
     >

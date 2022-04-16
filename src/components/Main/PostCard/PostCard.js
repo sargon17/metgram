@@ -28,7 +28,8 @@ export default function PostCard({ img, artist, classifications, title }) {
             <Grid item>
               <Box
                 sx={{
-                  width: "100%",
+                  // width: "100vw",
+                  maxWidth: "90%",
                   display: "flex",
                   alignItems: "center",
                   gap: "1rem",
@@ -48,11 +49,14 @@ export default function PostCard({ img, artist, classifications, title }) {
                   <Typography
                     variant="h6"
                     sx={{
+                      maxWidth: "100%",
+                      whiteSpace: "nowrap",
                       lineHeight: "1rem",
                       fontWeight: "600",
                       textTransform: "uppercase",
                       fontFamily: "Roboto",
                       fontSize: "1rem",
+                      textOverflow: "ellipsis",
                     }}
                   >
                     {artist}
