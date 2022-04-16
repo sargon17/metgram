@@ -40,10 +40,25 @@ export default function Header() {
     setMenuOpen(!menuOpen);
   }
 
+  console.log(selectedDepartment);
+  console.log(departments);
+
+  // let selectedDepartmentIndex = departments.forEach((department) => {
+  //   department.id === selectedDepartment ? department.displayName : null;
+  // });
+  let selectedDepartmentName =
+    departments.length > 0
+      ? departments.find((department) => {
+          return department.departmentId === selectedDepartment;
+        }).displayName
+      : null;
+
+  console.log(selectedDepartmentName);
+
   return (
     <ThemeProvider theme={whiteTheme}>
       <AppBar
-        elevation={1}
+        elevation={"header"}
         sx={{
           backgroundColor: "primary.transparent",
         }}
@@ -57,16 +72,29 @@ export default function Header() {
               justifyContent: "space-between",
             }}
           >
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: "700",
-                textTransform: "uppercase",
-                fontFamily: "Roboto",
-              }}
-            >
-              metgram
-            </Typography>
+            <Box>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: "700",
+                  textTransform: "uppercase",
+                  fontFamily: "Roboto",
+                  lineHeight: "1",
+                }}
+              >
+                metgram
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: "400",
+                  fontFamily: "Roboto",
+                  lineHeight: "1.2",
+                  fontSize: "0.85rem",
+                }}
+              >
+                {selectedDepartmentName}
+              </Typography>
+            </Box>
             <Button
               variant="text"
               color="tertiary"
@@ -105,7 +133,6 @@ export default function Header() {
               }}
             >
               <Paper
-                elevation={3}
                 sx={{
                   paddingTop: "10px",
                   width: "100%",

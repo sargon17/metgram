@@ -1,6 +1,8 @@
 import React from "react";
 import { Typography, Box, Avatar, Paper, Grid } from "@mui/material";
 import { stringAvatar } from "../../../generalFunctions";
+import { ThemeProvider } from "@mui/material/styles";
+import whiteTheme from "../../../WhiteTheme";
 
 export default function PostCard({ img, artist, classifications, title }) {
   if (img === "") {
@@ -11,91 +13,103 @@ export default function PostCard({ img, artist, classifications, title }) {
   }
 
   return (
-    <Grid item xs={12}>
-      <Paper
-        elevation={1}
-        sx={{
-          width: "100%",
-          borderRadius: "0.5rem",
-        }}
-        className="met__post-card"
-      >
-        <Grid container spacing={0}>
-          <Grid item xs={12}>
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-                padding: " 0.5rem 1rem",
-              }}
-            >
-              <Avatar {...stringAvatar(artist)} />
+    <ThemeProvider theme={whiteTheme}>
+      <Grid item xs={12}>
+        <Paper
+          elevation={"cards"}
+          sx={{
+            width: "100%",
+            borderRadius: "10px",
+            boxShadow: "primary",
+          }}
+          className="met__post-card"
+        >
+          <Grid container spacing={0}>
+            <Grid item xs={12}>
               <Box
                 sx={{
-                  boxSizing: "border-box",
+                  width: "100%",
                   display: "flex",
-                  alignItems: "flex-start",
-                  justifyContent: "center",
-                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "1rem",
+                  padding: " 0.5rem 1rem",
                 }}
               >
-                <Typography
-                  variant="h6"
+                <Avatar {...stringAvatar(artist)} />
+                <Box
                   sx={{
-                    lineHeight: "1rem",
-                    fontWeight: "600",
-                    textTransform: "uppercase",
-                    fontFamily: "Roboto",
-                    fontSize: "1rem",
+                    boxSizing: "border-box",
+                    display: "flex",
+                    alignItems: "flex-start",
+                    justifyContent: "center",
+                    flexDirection: "column",
                   }}
                 >
-                  {artist}
-                </Typography>
-                <Typography
-                  variant="overline"
-                  sx={{
-                    lineHeight: "1rem",
-                  }}
-                >
-                  {classifications}
-                </Typography>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      lineHeight: "1rem",
+                      fontWeight: "600",
+                      textTransform: "uppercase",
+                      fontFamily: "Roboto",
+                      fontSize: "1rem",
+                    }}
+                  >
+                    {artist}
+                  </Typography>
+                  <Typography
+                    variant="overline"
+                    sx={{
+                      lineHeight: "1rem",
+                    }}
+                  >
+                    {classifications}
+                  </Typography>
+                </Box>
               </Box>
-            </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box
+                component="img"
+                src={img}
+                sx={{
+                  width: "100%",
+                  maxHeight: "40rem",
+                  objectFit: "contain",
+                }}
+              ></Box>
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <Box
-              component="img"
-              src={img}
-              sx={{
-                width: "100%",
-                maxHeight: "40rem",
-                objectFit: "contain",
-              }}
-            ></Box>
-          </Grid>
-        </Grid>
 
-        <Box
-          sx={{
-            padding: " 0.2rem 1rem",
-          }}
-        >
-          <Typography
-            variant="h6"
+          <Box
             sx={{
-              fontWeight: "600",
-              textTransform: "uppercase",
-              fontFamily: "Roboto",
-              fontSize: "1rem",
+              padding: "6px 1rem",
             }}
           >
-            {artist}
-          </Typography>
-          <Typography variant="body2">{title}</Typography>
-        </Box>
-      </Paper>
-    </Grid>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: "600",
+                textTransform: "uppercase",
+                fontFamily: "Roboto",
+                fontSize: "14px",
+              }}
+            >
+              {artist}
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                fontWeight: "400",
+                fontFamily: "Roboto",
+                fontSize: "12px",
+              }}
+            >
+              {title}
+            </Typography>
+          </Box>
+        </Paper>
+      </Grid>
+    </ThemeProvider>
   );
 }

@@ -10,7 +10,6 @@ export default function App() {
   return (
     <ThemeProvider theme={whiteTheme}>
       <Paper
-        elevation={0}
         sx={{
           paddingTop: "4rem",
           width: "100%",

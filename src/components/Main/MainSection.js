@@ -58,7 +58,6 @@ export default function MainSection() {
       }}
     >
       <Box
-        elevation={1}
         sx={{
           minWidth: "320px",
           height: "60vh",
@@ -74,12 +73,10 @@ export default function MainSection() {
         onMouseLeave={() => setIsFilterOpen(false)}
       >
         <Paper
-          elevation={1}
           sx={{
             padding: "10px",
             height: "100%",
             borderRight: "40px solid",
-            // borderColor: "primary.main",
           }}
         >
           <Box>
@@ -139,7 +136,7 @@ export default function MainSection() {
           </Box>
         </Paper>
       </Box>
-      <Box sx={{ margin: "2px" }}>
+      <Box sx={{ margin: "5px" }}>
         <Grid container justifyContent="center">
           <Grid item xs={12} sm={10} md={8} lg={6} xl={4}>
             <Grid
@@ -174,6 +171,7 @@ export default function MainSection() {
                   sx={{
                     background: "tertiary",
                     margin: "20px auto",
+                    boxShadow: "cards",
                   }}
                   onClick={() => {
                     handleDisplayablePosts();
