@@ -25,7 +25,7 @@ export default function PostCard({ img, artist, classifications, title }) {
           className="met__post-card"
         >
           <Grid container spacing={0}>
-            <Grid item xs={12}>
+            <Grid item>
               <Box
                 sx={{
                   width: "100%",
