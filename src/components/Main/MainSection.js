@@ -48,7 +48,7 @@ export default function MainSection() {
       <Grid container spacing={2} justifyContent="center">
         <Grid
           item
-          xs={12}
+          xs={10}
           sm={10}
           md={8}
           lg={6}

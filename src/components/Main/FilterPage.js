@@ -40,9 +40,6 @@ export default function FilterPage() {
       e.preventDefault();
       window.scroll(0, 0);
     };
-    window.ontouchend = (e) => {
-      e.preventDefault();
-    };
   } else {
     body.style.overflow = "visible";
   }
