@@ -1,20 +1,9 @@
 import React from "react";
 import { Box } from "@mui/system";
 import PostCard from "./PostCard/PostCard";
-import { useState, useContext } from "react";
-import { createOptions } from "../../generalFunctions";
-import {
-  FormControl,
-  InputLabel,
-  Select,
-  CircularProgress,
-  Grid,
-  Button,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { useContext } from "react";
+import { CircularProgress, Grid, Button } from "@mui/material";
 import { ImportedDataContext } from "../../context/importedData";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import FilterPage from "./FilterPage";
 
 export default function MainSection() {
@@ -47,11 +36,6 @@ export default function MainSection() {
     });
   }
 
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const filterMenuStatus = isFilterOpen
-    ? "translateX(0)"
-    : "translateX( calc(-100% + 40px))";
-
   return (
     <Box
       sx={{
@@ -62,24 +46,6 @@ export default function MainSection() {
       }}
     >
       <Grid container spacing={2} justifyContent="center">
-        <Grid item xs={12} display="flex" justifyContent="center">
-          {/* <Button
-            variant="filled"
-            color="primary"
-            sx={{
-              borderRadius: "7px",
-              padding: "2px 20px",
-              margin: "0 0 10px 0",
-              backgroundColor: "primary.main",
-              color: "primary.contrastText",
-              boxShadow: "cards",
-            }}
-            onClick={() => setIsFilterOpen(!isFilterOpen)}
-            startIcon={<FilterListIcon />}
-          >
-            Filter
-          </Button> */}
-        </Grid>
         <Grid
           item
           xs={12}
