@@ -19,7 +19,6 @@ import { createOptions } from "../../generalFunctions";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import CloseIcon from "@mui/icons-material/Close";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import FilterListIcon from "@mui/icons-material/FilterList";
 
 export default function Header() {
   const [

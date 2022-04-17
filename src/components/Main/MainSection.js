@@ -14,6 +14,8 @@ import {
   Typography,
 } from "@mui/material";
 import { ImportedDataContext } from "../../context/importedData";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import FilterPage from "./FilterPage";
 
 export default function MainSection() {
   const [
@@ -53,91 +55,49 @@ export default function MainSection() {
   return (
     <Box
       sx={{
-        width: "100vw",
+        width: "100%",
         minHeight: "100vh",
         paddingTop: "10px",
+        overflow: "hidden",
       }}
     >
-      <Box
-        sx={{
-          minWidth: "320px",
-          height: "60vh",
-          position: "fixed",
-          top: "100px",
-          left: "0",
-          zIndex: "1",
-          transition: "transform 0.5s ease-in-out",
-          display: { xs: "none", lg: "block" },
-          transform: filterMenuStatus,
-        }}
-        onMouseEnter={() => setIsFilterOpen(true)}
-        onMouseLeave={() => setIsFilterOpen(false)}
-      >
-        <Paper
+      <Grid container spacing={2} justifyContent="center">
+        <Grid item xs={12} display="flex" justifyContent="center">
+          {/* <Button
+            variant="filled"
+            color="primary"
+            sx={{
+              borderRadius: "7px",
+              padding: "2px 20px",
+              margin: "0 0 10px 0",
+              backgroundColor: "primary.main",
+              color: "primary.contrastText",
+              boxShadow: "cards",
+            }}
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+            startIcon={<FilterListIcon />}
+          >
+            Filter
+          </Button> */}
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={10}
+          md={8}
+          lg={6}
+          xl={4}
+          display="flex"
+          justifyContent="center"
           sx={{
-            padding: "10px",
-            height: "100%",
-            borderRight: "40px solid",
+            position: "relative",
           }}
         >
-          <Box>
-            <Typography
-              variant="h6"
-              sx={{
-                fontFamily: "Roboto",
-                color: "tertiary.main",
-              }}
-            >
-              Filter
-            </Typography>
-          </Box>
-          <FormControl
-            variant="outlined"
-            color="tertiary"
-            sx={{
-              margin: "20px 10px",
-              minWidth: "200px",
-              // opacity: isFilterOpen ? "1" : "0",
-              // transition: "opacity 0.5s ease-in-out",
-            }}
-          >
-            <InputLabel id="department">Chose the MET Department</InputLabel>
-            <Select
-              value={selectedDepartment}
-              label="Chose the MET Department"
-              onChange={(event) => {
-                handleDepartmentChange(event);
-              }}
-            >
-              {departments.length > 0 && createOptions(departments)}
-            </Select>
-          </FormControl>
+          <FilterPage />
+        </Grid>
+      </Grid>
 
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              right: "0",
-              transform: "translate(30%, -50%)",
-              opacity: isFilterOpen ? "0" : "1",
-              transition: "opacity 0.5s ease-in",
-            }}
-          >
-            <Typography
-              variant="body1"
-              color="secondary.main"
-              sx={{
-                fontFamily: "Roboto",
-                fontWeight: "bold",
-                transform: "rotate(-90deg)",
-              }}
-            >
-              Filters Menu
-            </Typography>
-          </Box>
-        </Paper>
-      </Box>
-      <Box sx={{ margin: "5px" }}>
+      <Box sx={{ padding: "5px" }}>
         <Grid container justifyContent="center">
           <Grid item xs={12} sm={10} md={8} lg={6} xl={4}>
             <Grid

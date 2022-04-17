@@ -14,7 +14,7 @@ export default function PostCard({ img, artist, classifications, title }) {
 
   return (
     <ThemeProvider theme={whiteTheme}>
-      <Grid item xs={12}>
+      <Grid item xs={12} sx={{ maxWidth: "100vh" }}>
         <Paper
           elevation={"cards"}
           sx={{
@@ -44,13 +44,13 @@ export default function PostCard({ img, artist, classifications, title }) {
                     alignItems: "flex-start",
                     justifyContent: "center",
                     flexDirection: "column",
+                    maxWidth: "100%",
                   }}
                 >
                   <Typography
                     variant="h6"
                     sx={{
                       maxWidth: "100%",
-                      whiteSpace: "nowrap",
                       lineHeight: "1rem",
                       fontWeight: "600",
                       textTransform: "uppercase",
@@ -78,6 +78,7 @@ export default function PostCard({ img, artist, classifications, title }) {
                 src={img}
                 sx={{
                   width: "100%",
+                  maxWidth: "100vw",
                   maxHeight: "40rem",
                   objectFit: "contain",
                 }}
@@ -88,6 +89,7 @@ export default function PostCard({ img, artist, classifications, title }) {
           <Box
             sx={{
               padding: "6px 1rem",
+              maxWidth: "100vw",
             }}
           >
             <Typography
