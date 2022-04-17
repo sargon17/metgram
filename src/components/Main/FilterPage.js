@@ -34,16 +34,6 @@ export default function FilterPage() {
   ] = useContext(ImportedDataContext);
   const [filterOpen, setFilterOpen] = useState(false);
 
-  const body = document.querySelector("body");
-  if (filterOpen === true) {
-    window.onscroll = (e) => {
-      e.preventDefault();
-      window.scroll(0, 0);
-    };
-  } else {
-    body.style.overflow = "visible";
-  }
-
   function handleFilterClick() {
     setFilterOpen(!filterOpen);
   }
