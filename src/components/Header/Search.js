@@ -7,7 +7,7 @@ import { ImportedDataContext } from "../../context/importedData";
 import { InputAdornment } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-function Search() {
+function Search({ searchMode, setSearchMode }) {
   const [
     posts,
     setposts,
@@ -49,8 +49,6 @@ function Search() {
     }
   }
 
-  const [searchMode, setSearchMode] = useState(false);
-
   return (
     <Box
       sx={{
@@ -62,6 +60,7 @@ function Search() {
       {searchMode ? (
         <TextField
           variant="outlined"
+          value={search}
           size="small"
           placeholder="Search"
           onChange={(e) => handleInput(e)}
@@ -93,6 +92,7 @@ function Search() {
             ),
           }}
           sx={{
+            transition: "all 0.5s ease",
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
                 borderColor: "tertiary.main",

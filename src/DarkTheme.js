@@ -13,6 +13,8 @@ const darkTheme = createTheme({
     },
     tertiary: {
       main: "#DDDDDD;",
+      contrastText: "#222222",
+      transparent: "rgba(0, 0, 0, 0.6)",
     },
     text: {
       primary: "#DDDDDD",

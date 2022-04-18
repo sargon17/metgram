@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { AppBar, Typography, Toolbar, Box } from "@mui/material";
 
 import { ImportedDataContext } from "../../context/importedData";
@@ -32,6 +32,8 @@ export default function Header({ themeModeSelector, themeModeValue }) {
           return department.departmentId === selectedDepartment;
         }).displayName
       : null;
+
+  const [searchMode, setSearchMode] = useState(false);
 
   return (
     <AppBar
@@ -80,7 +82,7 @@ export default function Header({ themeModeSelector, themeModeValue }) {
               justifyContent: "space-between",
             }}
           >
-            <Search />
+            <Search searchMode={searchMode} setSearchMode={setSearchMode} />
             <IconButton
               variant="text"
               onClick={themeModeSelector}
