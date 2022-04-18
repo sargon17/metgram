@@ -19,6 +19,7 @@ export default function PostCard({ img, artist, classifications, title }) {
           borderRadius: "10px",
           boxShadow: "primary",
           backgroundColor: "primary.main",
+          transition: "all 0.5s ease-in-out",
         }}
       >
         <Grid container spacing={0}>

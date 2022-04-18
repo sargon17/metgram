@@ -44,6 +44,7 @@ export default function MainSection() {
         width: "100%",
         minHeight: "100vh",
         backgroundColor: "secondary.main",
+        transition: "all 0.5s ease-in-out",
       }}
     >
       <Box

@@ -16,6 +16,9 @@ const whiteTheme = createTheme({
       contrastText: "#FFFFFF",
       transparent: "rgba(0, 0, 0, 0.6)",
     },
+    text: {
+      primary: "#222222",
+    },
   },
   shadows: {
     0: "none",

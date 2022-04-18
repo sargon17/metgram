@@ -6,9 +6,9 @@ import { ImportedDataContext } from "../../context/importedData";
 import { IconButton } from "@mui/material";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { themeContext } from "../../context/themeContext";
+import LightModeIcon from "@mui/icons-material/LightMode";
 
-export default function Header() {
+export default function Header({ themeModeSelector, themeModeValue }) {
   const [
     posts,
     setposts,
@@ -24,8 +24,6 @@ export default function Header() {
     handleDepartmentChange,
   ] = useContext(ImportedDataContext);
 
-  // const [themeMode, toggleTheme] = useContext(themeContext);
-
   let selectedDepartmentName =
     departments.length > 0
       ? departments.find((department) => {
@@ -34,11 +32,11 @@ export default function Header() {
       : null;
 
   return (
-    // <ThemeProvider theme={whiteTheme}>
     <AppBar
       elevation={"header"}
       sx={{
         backgroundColor: "primary.transparent",
+        transition: "all 0.5s ease",
       }}
     >
       <Toolbar>
@@ -74,11 +72,23 @@ export default function Header() {
             </Typography>
           </Box>
           <Box>
-            <IconButton variant="text" color="tertiary">
+            <IconButton
+              variant="text"
+              color="tertiary"
+              sx={{
+                color: "text.primary",
+              }}
+            >
               <SearchRoundedIcon />
             </IconButton>
-            <IconButton variant="text" color="tertiary">
-              <DarkModeIcon />
+            <IconButton
+              variant="text"
+              onClick={themeModeSelector}
+              sx={{
+                color: "text.primary",
+              }}
+            >
+              {themeModeValue ? <LightModeIcon /> : <DarkModeIcon />}
             </IconButton>
           </Box>
         </Box>
