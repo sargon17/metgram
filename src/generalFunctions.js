@@ -6,11 +6,15 @@ export function randomNumber(min, max) {
 }
 
 //  function that return random piece of array of artworks
-export function getRandomPiece(idList) {
+export function getRandomPiece(idList, loaded) {
   let random = randomNumber(0, idList.length - 1);
-  if (idList[random] === undefined) {
-    return getRandomPiece();
+  if (idList.length === 0 || loaded.includes(idList[random])) {
+    return null;
   }
+  if (idList[random] === undefined) {
+    return getRandomPiece(idList, loaded);
+  }
+
   return idList[random];
 }
 

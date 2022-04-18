@@ -12,6 +12,7 @@ export const ImportedDataProvider = (props) => {
   const [displayablePosts, setDisplayablePosts] = useState(5);
   const [isReseach, setIsResearch] = useState(false);
   const [search, setSearch] = useState("");
+  const [previuslyLoaded, setPreviuslyLoaded] = useState([]);
 
   const [loading, setLoading] = useState(true);
 
@@ -43,7 +44,7 @@ export const ImportedDataProvider = (props) => {
           posts.length < displayablePosts + 10 &&
           validIDs.current.length > 0
         ) {
-          serverRequest(3);
+          isReseach ? serverSearchRequest(3) : serverRequest(3);
         }
       })
       .catch((err) => {
@@ -51,12 +52,33 @@ export const ImportedDataProvider = (props) => {
       });
   });
 
+  function serverSearchRequest(amount) {
+    for (let i = 0; i < amount; i++) {
+      let randomID = getRandomPiece(validIDs.current, previuslyLoaded);
+      if (!previuslyLoaded.includes(randomID)) {
+        previuslyLoaded.push(randomID);
+        axios
+          .get(
+            `https://collectionapi.metmuseum.org/public/collection/v1/objects/${randomID}`
+          )
+          .then((res) => {
+            setposts((posts) => [...posts, res.data]);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    }
+    setLoading(false);
+  }
+
   function serverRequest(requestsN) {
     for (let i = 0; i < requestsN; i++) {
       axios
         .get(
           `https://collectionapi.metmuseum.org/public/collection/v1/objects/${getRandomPiece(
-            validIDs.current
+            validIDs.current,
+            previuslyLoaded
           )}`
         )
         .then((response) => {

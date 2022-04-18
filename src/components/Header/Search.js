@@ -4,7 +4,8 @@ import { Box, TextField } from "@mui/material";
 import { IconButton } from "@mui/material";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import { ImportedDataContext } from "../../context/importedData";
-import { getRandomPiece } from "../../generalFunctions";
+import { InputAdornment } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 function Search() {
   const [
@@ -48,19 +49,70 @@ function Search() {
     }
   }
 
+  const [searchMode, setSearchMode] = useState(false);
+
   return (
-    <Box>
-      <TextField variant="outlined" onKeyUp={(e) => handleInput(e)}></TextField>
-      <IconButton
-        variant="text"
-        color="tertiary"
-        sx={{
-          color: "text.primary",
-        }}
-        onClick={handleSearch}
-      >
-        <SearchRoundedIcon />
-      </IconButton>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
+    >
+      {searchMode ? (
+        <TextField
+          variant="outlined"
+          size="small"
+          placeholder="Search"
+          onChange={(e) => handleInput(e)}
+          border
+          color="tertiary"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <IconButton onClick={handleSearch}>
+                  <SearchRoundedIcon
+                    sx={{
+                      color: "text.primary",
+                    }}
+                  />
+                </IconButton>
+              </InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  sx={{
+                    color: "text.primary",
+                  }}
+                  onClick={() => setSearchMode(false)}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "tertiary.main",
+              },
+            },
+          }}
+        ></TextField>
+      ) : (
+        <IconButton
+          variant="text"
+          color="tertiary"
+          sx={{
+            color: "text.primary",
+          }}
+          // onClick={handleSearch}
+          onClick={() => setSearchMode(!searchMode)}
+        >
+          <SearchRoundedIcon />
+        </IconButton>
+      )}
     </Box>
   );
 }

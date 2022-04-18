@@ -73,7 +73,13 @@ export default function Header({ themeModeSelector, themeModeValue }) {
               {selectedDepartmentName}
             </Typography>
           </Box>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <Search />
             <IconButton
               variant="text"
