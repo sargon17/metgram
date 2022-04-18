@@ -10,6 +10,8 @@ export const ImportedDataProvider = (props) => {
   const [selectedDepartment, setSelectedDepartment] = useState(11);
   let validIDs = useRef([]);
   const [displayablePosts, setDisplayablePosts] = useState(5);
+  const [isReseach, setIsResearch] = useState(false);
+  const [search, setSearch] = useState("");
 
   const [loading, setLoading] = useState(true);
 
@@ -31,7 +33,9 @@ export const ImportedDataProvider = (props) => {
     departments.length === 0 && getDepartments();
     axios
       .get(
-        `https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=${selectedDepartment}`
+        isReseach
+          ? `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&departmentId=${selectedDepartment}&q=${search}`
+          : `https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=${selectedDepartment}`
       )
       .then((res) => {
         validIDs.current = res.data.objectIDs;
@@ -105,6 +109,10 @@ export const ImportedDataProvider = (props) => {
         setDisplayablePosts,
         handleLoading,
         handleDepartmentChange,
+        search,
+        setSearch,
+        isReseach,
+        setIsResearch,
       ]}
     >
       {props.children}

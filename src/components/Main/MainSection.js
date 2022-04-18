@@ -21,6 +21,10 @@ export default function MainSection() {
     setDisplayablePosts,
     handleLoading,
     handleDepartmentChange,
+    search,
+    setSearch,
+    isReseach,
+    setIsResearch,
   ] = useContext(ImportedDataContext);
 
   function getData() {

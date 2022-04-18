@@ -21,6 +21,7 @@ export default function App() {
           paddingTop: "4rem",
           width: "100%",
           backgroundColor: "secondary.main",
+          transition: "all 0.5s ease-in-out",
         }}
       >
         <ImportedDataProvider>

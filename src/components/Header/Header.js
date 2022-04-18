@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppBar, Typography, Toolbar, Box } from "@mui/material";
-// import { ThemeProvider } from "@mui/material/styles";
-// import whiteTheme from "../../WhiteTheme";
+
 import { ImportedDataContext } from "../../context/importedData";
 import { IconButton } from "@mui/material";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import { TextField } from "@mui/material";
+import Search from "./Search";
+import axios from "axios";
 
 export default function Header({ themeModeSelector, themeModeValue }) {
   const [
@@ -72,15 +74,7 @@ export default function Header({ themeModeSelector, themeModeValue }) {
             </Typography>
           </Box>
           <Box>
-            <IconButton
-              variant="text"
-              color="tertiary"
-              sx={{
-                color: "text.primary",
-              }}
-            >
-              <SearchRoundedIcon />
-            </IconButton>
+            <Search />
             <IconButton
               variant="text"
               onClick={themeModeSelector}
