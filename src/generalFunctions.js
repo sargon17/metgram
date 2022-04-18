@@ -18,7 +18,22 @@ export function getRandomPiece(idList) {
 export function createOptions(departmentsList) {
   return departmentsList.map(({ departmentId, displayName }) => {
     return (
-      <MenuItem key={departmentId} value={departmentId}>
+      <MenuItem
+        key={departmentId}
+        value={departmentId}
+        sx={{
+          backgroundColor: "primary.main",
+          "&:hover": {
+            backgroundColor: "secondary.main",
+          },
+          "&:focus": {
+            backgroundColor: "secondary.main",
+            "&:hover": {
+              backgroundColor: "secondary.main",
+            },
+          },
+        }}
+      >
         {displayName}
       </MenuItem>
     );

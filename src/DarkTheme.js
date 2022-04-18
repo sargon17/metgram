@@ -1,20 +1,23 @@
 import { createTheme } from "@mui/material";
 
-const whiteTheme = createTheme({
+const darkTheme = createTheme({
   palette: {
-    type: "light",
+    type: "dark",
     primary: {
-      main: "#FFFFFF",
-      transparent: "rgba(255, 255, 255, 0.9)",
-      bgShadow: "0px 4px 7px rgba(0, 0, 0, 0.1);",
+      main: "#2D2D2D",
+      transparent: "#2D2D2Dee",
+      bgShadow: "0px 4px 7px rgba(0, 0, 0, 0.2);",
     },
     secondary: {
-      main: "#F9F9F9;",
+      main: "#222222",
     },
     tertiary: {
       main: "#222222;",
       contrastText: "#FFFFFF",
       transparent: "rgba(0, 0, 0, 0.6)",
+    },
+    text: {
+      primary: "#DDDDDD",
     },
   },
   shadows: {
@@ -48,4 +51,4 @@ const whiteTheme = createTheme({
   },
 });
 
-export default whiteTheme;
+export default darkTheme;
